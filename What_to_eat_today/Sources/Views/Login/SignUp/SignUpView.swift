@@ -122,7 +122,7 @@ struct SignUpView: View {
                 registerData.registerAccessToken = registerToken
                 print("데이터 : \(registerData)")
                 isActive = true
-                isLogged = true
+                isLogged = false
                 showErrorAlert = false
                 showAlreadyAlert = false
             }
