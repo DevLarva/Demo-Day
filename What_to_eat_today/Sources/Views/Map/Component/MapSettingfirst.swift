@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapSettingfirst: View {
     @Binding var selectedDistance: String
-    let Distancetitle: [String] =  ["2분 · 100m", "5분· 300m", "7분 · 500m", "10분 · 700m", "10분+ · 1.3km"]
+    let Distancetitle: [String] =  ["2분 · 100m", "5분 · 300m", "7분 · 500m", "10분 · 700m", "10분+ · 1.3km"]
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("거리")

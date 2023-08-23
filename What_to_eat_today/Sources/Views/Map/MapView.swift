@@ -97,7 +97,8 @@ struct MapViewSE: View {
                             CustomButton(storeId: location.name, showingStoreView: $showingStoreView)
                                 .sheet(isPresented: $showingStoreView) {
                                     NavigationView{
-//                                        StoreView()
+                                        StoreView(storeId: location.name
+                                        )
                                     }
                                 }
                                 .presentationDetents([.height(350)])
@@ -118,7 +119,7 @@ struct MapViewSE: View {
                         let location = Location(name: store.id, coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(store.y), longitude: CLLocationDegrees(store.x)), isheart: store.isWishlist)
                         tempLocations.append(location)
                     }
-
+                    
                     DispatchQueue.main.async {
                         locations = tempLocations
                     }
@@ -127,25 +128,32 @@ struct MapViewSE: View {
             Coordinator.shared.checkIfLocationServiceIsEnabled()
         }
     }
-    
     func updateMapList() {
         let distanceInMeters: Int
 
-        if selectedDistance == "10분+ · 1.3km" {
-            distanceInMeters = 1300
-        } else {
-            let distanceComponents = selectedDistance.split(separator: " ")
-            
-            if distanceComponents.count >= 2, let meterValue = Int(distanceComponents[0].dropLast()) {
-                distanceInMeters = meterValue
-            } else {
-                distanceInMeters = 0
-            }
-        }
-
+        switch selectedDistance {
+            case "10분+ · 1.3km":
+                distanceInMeters = 1300
+            case "10분 · 700m":
+                distanceInMeters = 700
+            case "7분 · 500m":
+                distanceInMeters = 500
+            case "5분 · 300m":
+                 distanceInMeters = 300
+        case "2분 · 100m":
+             distanceInMeters = 100
+             default:
+                 // 선택된 거리가 위의 경우들이 아닌 경우에는 그대로 받아옵니다.
+                 if let meterValue = Int(selectedDistance) {
+                     distanceInMeters = meterValue
+                  } else {
+                      // 만약 변환할 수 없는 값이라면 기본값으로 설정합니다.
+                      distanceInMeters = 0
+                   }
+         }
+        print("distanceInMeters :", distanceInMeters)
         let ranking: [String]? = selectedRanking == "선택안함" ? nil : [selectedRanking]
         let categories: [String]? = selectedCategory == "선택안함" ? nil : [selectedCategory]
-
         storeVM.mapList(distance: distanceInMeters, keyword: ranking, category: categories)
     }
 
