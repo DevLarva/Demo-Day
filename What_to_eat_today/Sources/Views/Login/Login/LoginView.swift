@@ -14,6 +14,7 @@ import AuthenticationServices
 
 struct LoginView: View {
     @StateObject private var authVM = AuthVM()
+    
     @State var registerData: RegisterRequest = RegisterRequest.init()
     @Binding var isLogged: Bool?
     
@@ -154,7 +155,7 @@ struct LoginView: View {
             authVM.registerTokenUpdated .sink { registerToken in
                 isNotAccount = true
 //                isActive = false
-                isLogged = true
+                isLogged = false
                 isError = false
             }
             .store(in: &authVM.subscription)
