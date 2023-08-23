@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EndingLoginView: View {
     @StateObject private var authVM = AuthVM()
+    @StateObject private var userVM = UserVM()
+    
     @Binding var registerData: RegisterRequest
     @Binding var selectedUIImage: UIImage?
     @Binding var isLogged: Bool?
@@ -48,6 +50,11 @@ struct EndingLoginView: View {
                             }
                             .store(in: &authVM.subscription)
                             authVM.registerSuccess.sink { /// 성공 시
+                                userVM.userInfo()
+                                userVM.infoSuccess .sink{ _ in
+                                    UserDefaults.standard.set(userVM.userInfoData.campers?.university.name, forKey: UniversityName.universityName.rawValue)
+                                    UserDefaults.standard.set(userVM.userInfoData.nickname, forKey: UserNickname.userNickname.rawValue)
+                                }
                                 isLogged = true
 //                                isshowHomeView = true
                             }

@@ -29,7 +29,6 @@ struct AppView: View {
                             userVM.infoSuccess .sink{ _ in
                                 UserDefaults.standard.set(userVM.userInfoData.campers?.university.name, forKey: UniversityName.universityName.rawValue)
                                 UserDefaults.standard.set(userVM.userInfoData.nickname, forKey: UserNickname.userNickname.rawValue)
-//                                print("닉네임 테스트 : \(UserDefaults.standard.string(forKey: "userNickname"))")
                             }.store(in: &userVM.subscription)
                         }
                     }
