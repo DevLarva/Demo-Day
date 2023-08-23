@@ -1,0 +1,19 @@
+<svg width="44" height="50" viewBox="0 0 44 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id=" Pin icon">
+<g id="Union" filter="url(#filter0_d_2733_5196)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M24.1692 38.9251C33.6878 37.7775 41.0643 29.6724 41.0643 19.8444C41.0643 9.22955 32.4593 0.624512 21.8444 0.624512C11.2296 0.624512 2.62451 9.22955 2.62451 19.8444C2.62451 29.6724 10.001 37.7775 19.5196 38.9251L21.5688 44.1946C21.6666 44.446 22.0222 44.446 22.12 44.1946L24.1692 38.9251Z" fill="#FF4D26"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_2733_5196" x="0.125673" y="0.624512" width="43.4376" height="48.7565" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2.49884"/>
+<feGaussianBlur stdDeviation="1.24942"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.22 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2733_5196"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2733_5196" result="shape"/>
+</filter>
+</defs>
+</svg>
