@@ -59,6 +59,12 @@ struct MyProfileView: View {
                 /// 로그아웃 API
                 UserDefaultsManager.shared.clearAll()
                 authVM.logout()
+                for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                            UserDefaults.standard.removeObject(forKey: key.description)
+                        }
+                for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+                   print("\(key) = \(value) \n")
+                 }
                 isLogged = false
             }
         }
@@ -76,7 +82,12 @@ struct MyProfileView: View {
             }
             .store(in: &authVM.subscription)
             authVM.taskSuccess .sink {
-                print("토큰 삭제완료")
+                for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                            UserDefaults.standard.removeObject(forKey: key.description)
+                        }
+                for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+                   print("\(key) = \(value) \n")
+                 }
                 isLogged = false
             }
             .store(in: &authVM.subscription)
