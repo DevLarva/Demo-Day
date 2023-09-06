@@ -25,11 +25,13 @@ struct AppView: View {
                     withAnimation {
                         self.jwtTokenCheck { isLoggedResult in
                             self.isLogged = isLoggedResult
-                            userVM.userInfo()
-                            userVM.infoSuccess .sink{ _ in
-                                UserDefaults.standard.set(userVM.userInfoData.campers?.university.name, forKey: UniversityName.universityName.rawValue)
-                                UserDefaults.standard.set(userVM.userInfoData.nickname, forKey: UserNickname.userNickname.rawValue)
-                            }.store(in: &userVM.subscription)
+                            if isLogged ?? false {
+                                userVM.userInfo()
+                                userVM.infoSuccess .sink{ _ in
+                                    UserDefaults.standard.set(userVM.userInfoData.campers?.university.name, forKey: UniversityName.universityName.rawValue)
+                                    UserDefaults.standard.set(userVM.userInfoData.nickname, forKey: UserNickname.userNickname.rawValue)
+                                }.store(in: &userVM.subscription)
+                            }
                         }
                     }
                 }
