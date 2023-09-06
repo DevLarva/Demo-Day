@@ -52,7 +52,7 @@ struct StoreRankingElementView: View {
             Image(rankingData.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
+                .frame(width: 50, height: 50)
                 .clipped()
             
             //텍스트
