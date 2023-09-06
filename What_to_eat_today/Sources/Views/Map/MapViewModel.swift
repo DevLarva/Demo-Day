@@ -16,7 +16,7 @@ enum MapDetails {
 final class ContentViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
 
     var locationManager: CLLocationManager?
-
+    
     @Published var region = MKCoordinateRegion(
         center: MapDetails.startingLocation,
         span: MapDetails.defaultSpan)
@@ -30,7 +30,10 @@ final class ContentViewModel: NSObject, ObservableObject,CLLocationManagerDelega
             print("위치 권한을 허용해주세요.")
         }
     }
-
+    func setRegion(for location: CLLocationCoordinate2D) {
+        let regionSpan = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+        region = regionSpan
+    }
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
 
@@ -57,3 +60,4 @@ final class ContentViewModel: NSObject, ObservableObject,CLLocationManagerDelega
         checkLocationAuthorization()
     }
 }
+

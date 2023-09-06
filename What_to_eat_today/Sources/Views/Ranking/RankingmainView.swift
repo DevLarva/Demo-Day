@@ -87,6 +87,7 @@ struct RankingmainView: View {
                         }
                         .padding()
                     }
+
                     
 
                     

@@ -12,38 +12,55 @@ import MapKit
 import CoreLocation
 
 struct StoreMapView: View {
-    @StateObject private var viewModel = ContentViewModel() // 차후 카카오 지도로 대체 필요
-    
-    var body: some View{
-        ZStack(alignment:.bottomTrailing) {
-            Map(coordinateRegion: $viewModel.region,showsUserLocation: true)
+    var storeDetail: StoreDetailResponse // 가게 정보를 전달받음
+    @StateObject private var mapViewModel = StoreMapViewModel()
+    @StateObject private var viewModel = ContentViewModel()
+
+    var body: some View {
+        ZStack(alignment: .bottomTrailing) {
+            Map(coordinateRegion: $viewModel.region,
+                annotationItems: mapViewModel.annotations) { annotation in
+                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: annotation.position.y, longitude: annotation.position.x), tint: .red)
+                }
                 .ignoresSafeArea()
                 .accentColor(Color(.systemPink))
                 .onAppear {
-                    viewModel.checkIfLocationServicesIsEnabled()
+                    mapViewModel.setAnnotation(for: storeDetail)
+                    viewModel.setRegion(for: CLLocationCoordinate2D(latitude: storeDetail.y, longitude: storeDetail.x))
                 }
-            
-            HStack(alignment: .center, spacing: 0) {
-                Image("map")
-                .frame(width: 24, height: 24)
-            }
-            .padding(7)
-            .frame(width: 38, height: 38, alignment: .center)
-            .background(Color.BlackWhiteWhite)
-            .cornerRadius(8)
-            .shadow(color: .black.opacity(0.11), radius: 4, x: 0, y: 4)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 12)
         }
-        .frame(width: 343, height: 181) // 차후 비율로 조정 필요
+        .frame(width: 343, height: 181) // 차후비율로조정필요
         .cornerRadius(8)
-        
     }
 }
 
+class StoreMapViewModel: ObservableObject {
+    @Published var annotations: [CustomAnnotation] = []
+    
+    func setAnnotation(for storeDetail: StoreDetailResponse) {
+        let annotation = CustomAnnotation(title: storeDetail.storeName, position: Position(x: storeDetail.y, y: storeDetail.x))
+        annotations.append(annotation)
+    }
+}
+
+struct CustomAnnotation: Identifiable {
+    let id = UUID()
+    let title: String?
+    let position: Position
+}
+
+struct Position {
+    let x: Double
+    let y: Double
+}
+
+struct StoreDetailResponseExample {
+    static let sampleData = StoreDetailResponse(storeName: "가게 예시", category: "식당", imageUrl: nil, keywords: [], tags: [:], status: true, phoneNumber: "010-1234-5678", address: "대한민국 어디엔가", time: "10:00 ~ 22:00", imageCount: 0, x: 128.1054441100458, y: 35.15615892617527)
+}
 
 struct StoreMapView_Previews: PreviewProvider {
     static var previews: some View {
-        StoreMapView()
+        StoreMapView(storeDetail: StoreDetailResponseExample.sampleData)
     }
 }
+

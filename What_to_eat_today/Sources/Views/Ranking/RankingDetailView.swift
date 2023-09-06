@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RankingDetailView: View {
     var rankData: RankStore
+    @ObservedObject var storeVM = StoreVM()
     var rankIndex: Int
     var body: some View {
         HStack(alignment: .top) {
@@ -18,14 +19,14 @@ struct RankingDetailView: View {
                 .frame(width: 70, height: 108)
                 .cornerRadius(4)
                 .clipped()
-
-
+            
+            
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
-                    Rankingfirst(rankData: rankData, rank : rankIndex)
-                }.frame()
-
-
+                    Rankingfirst(rankData: rankData, rank: rankIndex)
+                }
+                
+                
                 HStack {
                     Rankingsecond(rankData: rankData)
                 }
@@ -34,6 +35,7 @@ struct RankingDetailView: View {
         }
         
     }
+    
 }
 
 
