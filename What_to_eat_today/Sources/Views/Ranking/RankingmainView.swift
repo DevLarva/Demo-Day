@@ -74,12 +74,12 @@ struct RankingmainView: View {
                     
                     
                     VStack(alignment: .leading, spacing: 0) {
-                        ForEach(filteredRankingData(), id: \.id) { rankingItem in
+                        ForEach(filteredRankingData().indices, id: \.self) { index in
                             ScrollView {
-                                CustomNavLink(destination: StoreView(storeId: rankingItem.id)
+                                CustomNavLink(destination: StoreView(storeId: filteredRankingData()[index].id)
                                     .customNavigationTitle("랭킹")
                                 ) {
-                                    RankingDetailView(rankData: rankingItem)
+                                    RankingDetailView(rankData: filteredRankingData()[index], rankIndex:index+1)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
@@ -87,6 +87,8 @@ struct RankingmainView: View {
                         }
                         .padding()
                     }
+                    
+
                     
                     
                 }

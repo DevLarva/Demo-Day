@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct RankingDetailView: View {
-    //var rank: Ranking
     var rankData: RankStore
-    
+    var rankIndex: Int
     var body: some View {
         HStack(alignment: .top) {
             Image(rankData.imageURL ?? "store-default")
@@ -23,8 +22,9 @@ struct RankingDetailView: View {
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
-                    Rankingfirst(rankData: rankData)
-                }
+                    Rankingfirst(rankData: rankData, rank : rankIndex)
+                }.frame()
+
 
                 HStack {
                     Rankingsecond(rankData: rankData)
