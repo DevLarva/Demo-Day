@@ -205,7 +205,7 @@ enum StoreRouter: URLRequestConvertible {
             request = try URLEncoding.queryString.encode(request, with: parameters)
             return request
         /// access토큰만 필요한 경우
-        case .getWishlist, .storeDetail, .reviewedStores, .myReviews, .rankSample, .rank, .deleteReview, .getImages:
+        case .getWishlist, .storeDetail, .reviewedStores, .myReviews, .rankSample, .rank, .deleteReview, .getImages, .recommendStore:
             return request
         default:
             request.httpBody = try JSONEncoding.default.encode(request, with: parameters).httpBody
