@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EmailLoginView: View {
     @StateObject private var authVM = AuthVM()
+    @StateObject private var userVM = UserVM()
     @Binding var isLogged: Bool?
     
     @State var Email = ""
@@ -89,7 +90,13 @@ struct EmailLoginView: View {
                             }
                             .store(in: &authVM.subscription)
                             authVM.loginSuccess.sink { /// 성공 시
-                                isLogged = true
+                                userVM.userInfo()
+                                userVM.infoSuccess .sink{ _ in
+                                    UserDefaults.standard.set(userVM.userInfoData.campers?.university.name, forKey: UniversityName.universityName.rawValue)
+                                    UserDefaults.standard.set(userVM.userInfoData.nickname, forKey: UserNickname.userNickname.rawValue)
+                                    isLogged = true
+                                }.store(in: &userVM.subscription)
+                                
 //                                isActive = true
                             }
                             .store(in: &authVM.subscription)

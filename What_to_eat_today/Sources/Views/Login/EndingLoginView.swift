@@ -54,8 +54,8 @@ struct EndingLoginView: View {
                                 userVM.infoSuccess .sink{ _ in
                                     UserDefaults.standard.set(userVM.userInfoData.campers?.university.name, forKey: UniversityName.universityName.rawValue)
                                     UserDefaults.standard.set(userVM.userInfoData.nickname, forKey: UserNickname.userNickname.rawValue)
-                                }
-                                isLogged = true
+                                    isLogged = true
+                                }.store(in: &userVM.subscription)
 //                                isshowHomeView = true
                             }
                             .store(in: &authVM.subscription)
