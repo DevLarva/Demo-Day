@@ -9,13 +9,15 @@ import SwiftUI
 
 struct Rankingfirst: View {
     var rankData: RankStore
-    
+    @StateObject private var storeVM = StoreVM()
+    var rank: Int //등수
+    @State var isWishlist: Bool = true
     var body: some View {
         
-        HStack(alignment: .center, spacing: 8) {
+        HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Text("1등")
+                HStack(alignment: .center) {
+                    Text("\(rank)등")
                         .font(
                             Font.custom("Pretendard", size: 11)
                                 .weight(.semibold)
@@ -37,18 +39,21 @@ struct Rankingfirst: View {
                             Font.custom("Pretendard", size: 18)
                                 .weight(.medium)
                         )
+                        .lineLimit(1) // 길어지면 ...으로 처리
                         .foregroundColor(.GrayScale900)
+                        
                     
-                    
-                    Text("한식")
+                    Text(rankData.category)
                         .font(
                             Font.custom("Pretendard", size: 11)
                                 .weight(.medium)
                         )
                         .kerning(0.25)
                         .foregroundColor(.GrayScale500)
+                    Spacer() // 추가된 코드
                     
-                }
+                }.padding(0)
+                
                 
                 HStack(alignment: .center, spacing: 6) {
                     
@@ -82,11 +87,33 @@ struct Rankingfirst: View {
                     
                     
                 }.padding(0)
+                    
             }
-            Spacer().frame(width: 20)
+            .frame(width: 225, height: 50)
+            
+            Spacer().frame(width: 5)
+            
             VStack {
-                Image("heartfill")
-                    .frame(width: 32, height: 32)
+                HStack(alignment: .center, spacing: 0) {
+                    Button(action: {
+                        isWishlist.toggle()
+                    }) {
+                        HStack(alignment: .center, spacing: 8) {
+                            Image(isWishlist ? "heartfill" : "heart")
+                                .frame(width: 32, height: 32)
+                        }.padding(.trailing)
+                            .frame(width: 32, height: 32, alignment: .center)
+                        
+                    }
+                }
+                
+                .onAppear {
+                    isWishlist = rankData.wishlist
+                }
+
+                .onChange(of: isWishlist){ _ in
+                    storeVM.toggleWishList(storeId: rankData.id, isLike: isWishlist )
+                }
             }
         }
         .padding(0)

@@ -85,9 +85,6 @@ struct Categoryfirst: View {
                 .onChange(of: isWishlist){ _ in
                     storeVM.toggleWishList(storeId: store.storeId, isLike: isWishlist)
                 }
-                
-                
-                
             }.padding(0)
             
             HStack(alignment: .center, spacing: 8) {
