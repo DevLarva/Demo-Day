@@ -7,13 +7,16 @@
 
 import SwiftUI
 
-struct CustomStoreSearchNothingCell:View {
+struct CustomStoreSearchNothingCell: View {
+    var searchText: String
+    
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
             HStack {
-                Text("‘김밪’")
+                Text("\(searchText)")
                   .font(Font.custom("Pretendard", size: 16))
                   .foregroundColor(Color.PrimaryOrange300)
+                  .lineLimit(1)
                 Text("에 대한 검색 결과가 없습니다.")
                   .font(Font.custom("Pretendard", size: 16))
                   .foregroundColor(Color.GrayScale800)
@@ -31,8 +34,8 @@ struct CustomStoreSearchNothingCell:View {
     }
 }
 
-struct CustomStoreSearchNothingCell_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomStoreSearchNothingCell()
-    }
-}
+//struct CustomStoreSearchNothingCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CustomStoreSearchNothingCell()
+//    }
+//}

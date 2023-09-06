@@ -14,9 +14,13 @@ class StoreVM: ObservableObject {
     let taskSuccess = PassthroughSubject<Void, Never>()
     let taskError = PassthroughSubject<String, Never>()
     
+    let filterButtonTapped = PassthroughSubject<Void, Never>()
+    
     let storeInfoSuccess = PassthroughSubject<Void, Never>()
     @Published var categoryData: CategoryResponse = .init(한식: [], 중식: [], 양식: [], 일식: [], 분식: [], 아시아: [], 패스트푸드: [], 레스토랑: [],                                                카페: [], 술집: [])
     @Published var wishlistData: [Restaurant] = []
+    @Published var recommendData: [RecommendStore] = []
+    @Published var searchStoreData: [RecommendStore] = []
     @Published var mapListData: MapListResponse = .init(campers: .init(x: 35, y: 129), stores: [])
     @Published var mapStoreInfoData: Restaurant = .init(storeId: "", name: "", category: "", rank: [], score: 0.0, status: nil, reviewCount: 0, time: "", imageUrl: "", reviewImage: nil, reviewContent: nil, isWishlist: nil)
     @Published var storeDetailData: StoreDetailResponse = .init(storeName: "", category: "", imageUrl: nil, keywords: [], tags: [:], status: nil, phoneNumber: nil, address: "", time: "", imageCount: 0, x: 0.0, y: 0.0)
@@ -281,7 +285,42 @@ class StoreVM: ObservableObject {
             .store(in: &subscription)
     }
     //case recommendStore
+    func recommendStore() {
+        print("StoreVM: recommendStore() called")
+        
+        StoreApiService.recommendStore()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("StoreVM: recommendStore() \(error)")
+                }
+            } receiveValue: { recommendData in
+                self.recommendData = recommendData
+            }
+            .store(in: &subscription)
+    }
+    
     //case searchStore(keyword: String, orderby: String) // 쿼리스트링
+    func searchStore(keyword: String, orderby: String) {
+        print("StoreVM: searchStore() called")
+        
+        StoreApiService.searchStore(keyword: keyword, orderby: orderby)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("StoreVM: searchStore() \(error)")
+                }
+            } receiveValue: { searchStoreData in
+                self.searchStoreData = searchStoreData
+                self.taskSuccess.send()
+            }
+            .store(in: &subscription)
+    }
+    
     //case reviewedStores
     func reviewedStores() {
         print("StoreVM: reviewedStores() called")
