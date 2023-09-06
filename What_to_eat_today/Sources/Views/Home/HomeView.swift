@@ -48,7 +48,7 @@ struct HomeView: View {
                         .customNavigationBarBackButtonHidden(false)
                     ,isActive: $isSearchViewActive
                 ) {
-                    SearchBarButton(isNavItemActive: $isSearchViewActive)
+                    SearchBar(isNavItemActive: $isSearchViewActive)
                 }
                 
                 CustomNavLink(destination: RankingmainView()

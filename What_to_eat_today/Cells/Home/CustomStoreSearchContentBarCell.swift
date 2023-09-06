@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CustomStoreSearchContentBarCell: View {
+    @Binding var selectFilter: SearchFilter
     @Binding var SearchResultCnt: Int
     
     @State private var isFilterFlag: Bool = false
-    @State private var selectFilter: SearchFilter = SearchFilter(title: "거리순")// default 값
     
     var body: some View {
         HStack(alignment: .center) {
@@ -199,11 +199,11 @@ struct OtherReviewMenuList: View {
     }
 }
 
-struct CustomStoreSearchContentBarCell_Previews: PreviewProvider {
-    @State static var testResultCnt: Int = 4
-    
-    
-    static var previews: some View {
-        CustomStoreSearchContentBarCell(SearchResultCnt: $testResultCnt)
-    }
-}
+//struct CustomStoreSearchContentBarCell_Previews: PreviewProvider {
+//    @State static var testResultCnt: Int = 4
+//    
+//    
+//    static var previews: some View {
+//        CustomStoreSearchContentBarCell(SearchResultCnt: $testResultCnt)
+//    }
+//}

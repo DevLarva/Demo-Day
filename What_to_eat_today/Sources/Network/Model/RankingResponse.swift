@@ -15,7 +15,7 @@ struct RankingResponse: Codable {
     let 술약속: [RankStore]
 }
 
-struct RankStore: Codable {
+struct RankStore: Codable, Hashable {
     var id: String
     var name: String
     var category: String

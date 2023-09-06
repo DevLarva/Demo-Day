@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchFilter: Identifiable {
+struct SearchFilter: Identifiable, Equatable {
     let id = UUID().uuidString
     let title: String
 }

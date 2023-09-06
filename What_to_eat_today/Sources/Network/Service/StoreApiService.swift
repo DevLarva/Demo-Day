@@ -97,6 +97,7 @@ enum StoreApiService {
             .mapError { $0 as Error } // 에러 타입 변환
             .eraseToAnyPublisher()
     }
+    
     //case storeDetail(id: String)///패스 스트링
     static func storeDetail(id: String) -> AnyPublisher<StoreDetailResponse, Error> {
         print("StoreApiService - storeDetail() called")
@@ -321,7 +322,49 @@ enum StoreApiService {
     }
     
     //case recommendStore
+    static func recommendStore() -> AnyPublisher<[RecommendStore], Error> {
+        print("StoreApiService - recommendStore() called")
+        
+        let storedTokenData = UserDefaultsManager.shared.getTokens()
+        let credential = OAuthCredential(accessToken: storedTokenData.accessToken,
+                                         refreshToken: storedTokenData.refreshToken,
+                                         expiration: Date(timeIntervalSinceNow: 60 * 120))
+        
+        let authenticator = OAuthAuthenticator()
+        let authInterceptor = AuthenticationInterceptor(authenticator: authenticator,
+                                                        credential: credential)
+        
+        return ApiClient.shared.session
+            .request(StoreRouter.recommendStore, interceptor: authInterceptor)
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: [RecommendStore].self)
+            .value()
+            .mapError { $0 as Error } // 에러 타입 변환
+            .eraseToAnyPublisher()
+    }
+    
     //case searchStore(keyword: String, orderby: String) // 쿼리스트링
+    static func searchStore(keyword: String, orderby: String) -> AnyPublisher<[RecommendStore], Error> {
+        print("StoreApiService - searchStore() called")
+        
+        let storedTokenData = UserDefaultsManager.shared.getTokens()
+        let credential = OAuthCredential(accessToken: storedTokenData.accessToken,
+                                         refreshToken: storedTokenData.refreshToken,
+                                         expiration: Date(timeIntervalSinceNow: 60 * 120))
+        
+        let authenticator = OAuthAuthenticator()
+        let authInterceptor = AuthenticationInterceptor(authenticator: authenticator,
+                                                        credential: credential)
+        
+        return ApiClient.shared.session
+            .request(StoreRouter.searchStore(keyword: keyword, orderby: orderby), interceptor: authInterceptor)
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: [RecommendStore].self)
+            .value()
+            .mapError { $0 as Error } // 에러 타입 변환
+            .eraseToAnyPublisher()
+    }
+    
     //case reviewedStores
     static func reviewedStores() -> AnyPublisher<ReviewedStoresResponse, Error> {
         print("StoreApiService - reviewedStores() called")

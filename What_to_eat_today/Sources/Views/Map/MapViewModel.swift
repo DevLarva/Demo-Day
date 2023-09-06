@@ -31,7 +31,7 @@ final class ContentViewModel: NSObject, ObservableObject,CLLocationManagerDelega
         }
     }
     func setRegion(for location: CLLocationCoordinate2D) {
-        let regionSpan = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+        let regionSpan = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
         region = regionSpan
     }
     private func checkLocationAuthorization() {
