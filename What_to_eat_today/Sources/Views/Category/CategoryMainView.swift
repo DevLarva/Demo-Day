@@ -10,7 +10,6 @@ import SwiftUI
 struct CategoryMainView: View {
     @StateObject private var storeVM = StoreVM()
     //    var store: Restaurant
-    
     let titles: [String] = ["한식", "중식", "양식", "일식", "카페", "술집", "분식", "아시아", "패스트푸드", "레스토랑"]
     var ranks : [Ranking] = rankingData // 데이터 불러옴
     @State private var showMore: Bool = false
@@ -126,10 +125,6 @@ struct CategoryMainView: View {
                         .padding(.trailing, 16)
                     }.zIndex(1)
                     VStack(alignment: .leading, spacing: 0) {
-                        //                        if isCategoryDataEmpty() { // 데이터가 없는 경우
-                        
-                        //                        } else {
-                        
                         if isCategoryDataEmpty() {
                             CategoryDefultView()
                         } else {
@@ -139,16 +134,18 @@ struct CategoryMainView: View {
                                 ) {
                                     CategoryDetailView(store: restaurant)
                                 }
+                                Divider().padding()
                             }
                             .padding(.leading)
-                            Divider().padding()
+                            
                                
                         }
                     }
-                }
+                }.padding(.leading)
                 
             }
         } .onAppear {
+            
             storeVM.categorys(orderby: "distance")
             print(storeVM.categoryData)
         }

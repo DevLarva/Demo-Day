@@ -10,8 +10,6 @@ import SwiftUI
 struct ReviewMain: View {
     @StateObject private var storeVM = StoreVM()
     
-//    var ranks : [Ranking] = rankingData // 데이터 불러옴
-    @State private var isSearchViewActive = false
     @State private var searchText: String = ""
     @State private var showReviewWriteView = false
     var body: some View {
@@ -34,23 +32,25 @@ struct ReviewMain: View {
                         }.padding()
                         ReviewZip()
                         VStack(alignment: .leading) {
-                            ForEach(storeVM.reviewStoreData) { reviewStore in
-                                ReviewList(reviewStore: reviewStore)
+                            ForEach(storeVM.reviewStoreData.indices, id: \.self) { index in
+                                ReviewList(reviewStore: storeVM.reviewStoreData[index])
                                     .padding(.leading)
-                                Divider()
-                                    .padding(.top)
-                                    .padding(.bottom)
-                                    .padding(.horizontal)
+                                if index < storeVM.reviewStoreData.count - 1 {
+                                    Divider()
+                                        .padding(.top)
+                                        .padding(.bottom)
+                                        .padding(.horizontal)
+                                }
                             }
                         }.padding()
                         
                     }
-//                    Button(action: {
-//                        showReviewWriteView.toggle()
-//                    }) {
-//                        ReviewButton()
-//                            .padding(.bottom)
-//                    }
+                    Button(action: {
+                        showReviewWriteView.toggle()
+                    }) {
+                        ReviewButton()
+                            .padding(.bottom)
+                    }
                 }
             }
         }

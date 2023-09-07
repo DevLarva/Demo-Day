@@ -7,11 +7,15 @@
 import SwiftUI
 
 struct ReviewCompleteView: View {
+    @Binding var showReviewcompleteView: Bool
+    @Binding var showReviewWriteView: Bool
+    
     @State private var isshowReviewmain = false
     var body: some View {
         ZStack {
             if isshowReviewmain {
-                ReviewMain()
+//                ReviewMain()
+//                showReviewcompleteView = false
             } else {
                 VStack(alignment: .center, spacing: 16) {
                     HStack(alignment: .center, spacing: 0) {
@@ -46,6 +50,8 @@ struct ReviewCompleteView: View {
 
                     Button(action: {
                         isshowReviewmain.toggle()
+                        showReviewcompleteView = false
+                        showReviewWriteView = false
                     }) {
                         ReviewCompleteBtn()
                     }
@@ -57,8 +63,8 @@ struct ReviewCompleteView: View {
     }
 }
 
-struct ReviewCompleteView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviewCompleteView()
-    }
-}
+//struct ReviewCompleteView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReviewCompleteView()
+//    }
+//}
