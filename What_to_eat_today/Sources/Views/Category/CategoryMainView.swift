@@ -105,33 +105,33 @@ struct CategoryMainView: View {
 // MARK: - 필터
                     Spacer()
                         
-                        ZStack {
-                            Button(action: {
-                                isFilterFlag.toggle()
-                            }) {
-                                HStack(alignment: .center, spacing: 3) {
-                                    Text("필터")
-                                        .font(Font.custom("Pretendard", size: 12))
-                                        .foregroundColor(Color.GrayScale800)
-                                    Image(isFilterFlag ? "store-filter-on" : "store-filter-off")
-                                        .frame(width: 19, height: 19)
-                                }.zIndex(1)
-                                .padding(0)
-                            }
-                            .buttonStyle(PlainButtonStyle()) // Add this line
-                            .overlay(alignment: .topTrailing) {
-                                VStack {
-                                    if isFilterFlag {
-                                        Spacer(minLength: 20)
-                                        SearchFilterMenuList(selectFilter: $selectFilter) { filter in
-                                            isFilterFlag = false
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        .padding(.trailing, 16)
+//                        ZStack {
+//                            Button(action: {
+//                                isFilterFlag.toggle()
+//                            }) {
+//                                HStack(alignment: .center, spacing: 3) {
+//                                    Text("필터")
+//                                        .font(Font.custom("Pretendard", size: 12))
+//                                        .foregroundColor(Color.GrayScale800)
+//                                    Image(isFilterFlag ? "store-filter-on" : "store-filter-off")
+//                                        .frame(width: 19, height: 19)
+//                                }.zIndex(1)
+//                                .padding(0)
+//                            }
+//                            .buttonStyle(PlainButtonStyle()) // Add this line
+//                            .overlay(alignment: .topTrailing) {
+//                                VStack {
+//                                    if isFilterFlag {
+//                                        Spacer(minLength: 20)
+//                                        SearchFilterMenuList(selectFilter: $selectFilter) { filter in
+//                                            isFilterFlag = false
+//                                            
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        .padding(.trailing, 16)
                     }.zIndex(1)
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(storeVM.categorys.filter {selectedCategory == nil || $0.category == selectedCategory }) { restaurant in

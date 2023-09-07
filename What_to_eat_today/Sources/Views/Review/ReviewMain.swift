@@ -33,8 +33,12 @@ struct ReviewMain: View {
                         ReviewZip()
                         VStack(alignment: .leading) {
                             ForEach(storeVM.reviewStoreData.indices, id: \.self) { index in
-                                ReviewList(reviewStore: storeVM.reviewStoreData[index])
-                                    .padding(.leading)
+                                CustomNavLink(destination: StoreView(storeId: storeVM.reviewStoreData[index].id)
+                                    .customNavigationTitle(storeVM.reviewStoreData[index].name)
+                                ) {
+                                    ReviewList(reviewStore: storeVM.reviewStoreData[index])
+                                        .padding(.leading)
+                                }
                                 if index < storeVM.reviewStoreData.count - 1 {
                                     Divider()
                                         .padding(.top)
