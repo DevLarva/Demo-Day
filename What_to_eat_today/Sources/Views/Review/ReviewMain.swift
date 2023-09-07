@@ -42,7 +42,7 @@ struct ReviewMain: View {
                                     .customNavigationTitle(storeVM.reviewStoreData[index].name)
                                 ) {
                                     ReviewList(reviewStore: storeVM.reviewStoreData[index])
-                                        .padding(.leading)
+                                        .padding(.leading, 32)
                                 }
                                 
 
@@ -55,6 +55,9 @@ struct ReviewMain: View {
                             }
                         }.padding()
                         
+                    }
+                    .refreshable {
+                        await refresh()
                     }
                     Button(action: {
                         showReviewWriteView.toggle()
@@ -72,6 +75,9 @@ struct ReviewMain: View {
             }
             .store(in: &storeVM.subscription)
         }
+    }
+    @MainActor func refresh() async {
+        storeVM.getWishlist()
     }
 }
 
