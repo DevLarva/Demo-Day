@@ -14,6 +14,7 @@ struct StoreView:View {
     @State var storeinfo: StoreDetailResponse = .init(storeName: "", category: "", imageUrl: nil, keywords: [], tags: [:], status: nil, phoneNumber: nil, address: "", time: "", imageCount: 0, x: 0.0, y: 0.0)
     
     @State var convertedRankingData: [StoreRankingData] = []
+    @State var isWishlist: Bool = false
     @State var isActive = false
     //json 가져와서 걔를 풀고 store
     var body: some View {
@@ -51,22 +52,23 @@ struct StoreView:View {
                 VStack(alignment: .center, spacing: 8) {
                     HStack(alignment: .top, spacing: 8) {
                         //하트
-                        Button(action: {
-                            
-                        }) {
-                            HStack(alignment: .center, spacing: 0) {
-                                Image("heart")
-                                    .frame(width: 32, height: 32)
-                            }
-                            .padding(0)
-                            .frame(width: 56, height: 56, alignment: .center)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .inset(by: 0.5)
-                                    .stroke(Color.GrayScale200, lineWidth: 1)
-                            )
-                        }
+//                        Button(action: {
+//
+//                        }) {
+//                            HStack(alignment: .center, spacing: 0) {
+//                                Image("heart")
+////                                Image(store.isWishlist ? "heartfill" : "heart")
+//                                    .frame(width: 32, height: 32)
+//                            }
+//                            .padding(0)
+//                            .frame(width: 56, height: 56, alignment: .center)
+//                            .cornerRadius(8)
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 8)
+//                                    .inset(by: 0.5)
+//                                    .stroke(Color.GrayScale200, lineWidth: 1)
+//                            )
+//                        }
                         Button(action: {
                             isActive = true
                         }) {
@@ -99,6 +101,12 @@ struct StoreView:View {
         }
         .onAppear {
             storeVM.storeDetail(id: storeId)
+            storeVM.mapStoreInfo(storeid: storeId)
+            storeVM.taskSuccess
+                .sink { _ in
+                    isWishlist = storeVM.mapStoreInfoData.isWishlist ?? false
+                }
+                .store(in: &storeVM.subscription)
             storeVM.storeInfoSuccess .sink { _ in
                 storeinfo = storeVM.storeDetailData
                 convertedRankingData = {

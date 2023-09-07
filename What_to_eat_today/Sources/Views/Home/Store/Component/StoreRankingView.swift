@@ -53,11 +53,16 @@ struct StoreRankingElementView: View {
         
         VStack(alignment: .center, spacing: 8) {
             //이미지
-            Image(rankingData.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 50, height: 50)
-                .clipped()
+            HStack(alignment: .center, spacing: 0) {
+                Image(rankingData.imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+            }
+            .padding(.horizontal, 10.5)
+            .padding(.top, 6)
+            .padding(.bottom, 4.5283)
+            .frame(width: 78, height: 60, alignment: .center)
             
             //텍스트
             HStack(alignment: .center, spacing: 4) {

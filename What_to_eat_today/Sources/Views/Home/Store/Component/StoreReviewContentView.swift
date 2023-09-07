@@ -10,6 +10,7 @@ import URLImage
 
 struct StoreReviewContentView: View {
     @StateObject private var storeVM = StoreVM()
+    @Binding var reviewsCount: Int
     
     var review: Review
     @State private var reviewImages: [String] = []
@@ -85,6 +86,7 @@ struct StoreReviewContentView: View {
                                             isFilterFlag = false
                                             if(filter.title == "삭제") {
                                                 storeVM.deleteReview(reviewid: review.id)
+                                                reviewsCount -= 1
                                                 print("삭제")
                                             } else {
                                                 print("수정은 미구현")
@@ -175,7 +177,11 @@ struct StoreReviewContentView: View {
                 // 추천 수
                 Button(action: {
                     // 버튼을 클릭 시 백엔드에 POST 및 reviewRcmndCnt + 1, 색깔 변화
+                    storeVM.reviewLike(reviewid: review.id, isLike: !reviewRcmndClick)
                     reviewRcmndClick.toggle()
+                    storeVM.taskError .sink{ _ in
+                        reviewRcmndClick.toggle()
+                    }.store(in: &storeVM.subscription)
                 }) {
                     HStack(alignment: .center, spacing: 6) {
                         if(reviewRcmndClick){

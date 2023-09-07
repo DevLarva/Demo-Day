@@ -16,14 +16,15 @@ struct StoreReviewView: View {
     @State var reviewTab: String = "추천순"
     @State var reviewPage: Int = 1
     @State var reviewlimit: Int = 100
+    @State var reviewsCount: Int = 0
     @State var myReview: MyReview = .init(id: "", nickname: "", score: 0.0, content: "", tags: [], images: [], likeCount: 0, createdDate: "", userImage: nil)
     
     var body: some View {
         VStack {
             StoreReviewBarView(buttonTabbed: $buttonTabbed, reviewTab: $reviewTab, reviewCnt: reviews.count)
-            if reviews.count > 0 {
+            if reviewsCount > 0 {
                 ForEach(reviews) { review in
-                    StoreReviewContentView(review: review)
+                    StoreReviewContentView(reviewsCount: $reviewsCount, review: review)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 24)
@@ -43,6 +44,7 @@ struct StoreReviewView: View {
             }
             storeVM.taskSuccess .sink {
                 reviews = storeVM.getReviewData
+                reviewsCount = reviews.count
             }.store(in: &storeVM.subscription)
         }
         .onChange(of: buttonTabbed) { _ in
@@ -53,6 +55,7 @@ struct StoreReviewView: View {
             }
             storeVM.taskSuccess .sink {
                 reviews = storeVM.getReviewData
+                reviewsCount = reviews.count
             }.store(in: &storeVM.subscription)
         }
     }
