@@ -15,7 +15,8 @@ class StoreVM: ObservableObject {
     let taskError = PassthroughSubject<String, Never>()
     
     let filterButtonTapped = PassthroughSubject<Void, Never>()
-    
+    let selectedStore = PassthroughSubject<String, Never>()
+    let selectedStoreName = PassthroughSubject<String, Never>()
     let storeInfoSuccess = PassthroughSubject<Void, Never>()
     @Published var categoryData: CategoryResponse = .init(한식: [], 중식: [], 양식: [], 일식: [], 분식: [], 아시아: [], 패스트푸드: [], 레스토랑: [],                                                카페: [], 술집: [])
     @Published var wishlistData: [Restaurant] = []
