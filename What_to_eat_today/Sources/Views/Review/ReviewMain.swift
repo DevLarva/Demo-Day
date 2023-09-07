@@ -36,6 +36,8 @@ struct ReviewMain: View {
                             ForEach(storeVM.reviewStoreData.indices, id: \.self) { index in
                                 
                                 
+
+
                                 CustomNavLink(destination: StoreView(storeId: storeVM.reviewStoreData[index].id)
                                     .customNavigationTitle(storeVM.reviewStoreData[index].name)
                                 ) {
@@ -43,6 +45,7 @@ struct ReviewMain: View {
                                         .padding(.leading)
                                 }
                                 
+
                                 if index < storeVM.reviewStoreData.count - 1 {
                                     Divider()
                                         .padding(.top)
