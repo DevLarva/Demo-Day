@@ -81,7 +81,8 @@ struct RankingZipView: View {
                             ForEach(rankSamples.indices, id: \.self) { index in
                                 CustomNavLink(destination:
                                     StoreView(storeId:
-                                        rankSamples[index].id).customNavigationTitle("Home")
+                                        rankSamples[index].id)
+                                        .customNavigationTitle(rankSamples[index].name)
                                 ) { MainRanking(store:
                                     rankSamples[index], defaultImage:
                                     defaultImage)
@@ -101,8 +102,8 @@ struct RankingZipView: View {
                                      defaultImage = "alcohol-default"
                                }
                             }
-                            .onChange(of:selectedTitle){ value in
-                                 switch value{
+                            .onChange(of:selectedTitle) { value in
+                                 switch value {
                                  case "밥약":
                                      defaultImage = "babyak-default"
                                  case "가성비":
