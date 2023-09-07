@@ -1,5 +1,5 @@
 //
-//  DefultRankingView.swift
+//  CategoryDefultView.swift
 //  What_to_eat_today
 //
 //  Created by 백대홍 on 2023/09/07.
@@ -7,12 +7,9 @@
 
 import SwiftUI
 
-struct DefultRankingView: View {
+struct CategoryDefultView: View {
     var body: some View {
-        
-        
             VStack(alignment: .center, spacing: 20) {
-                
                 Rectangle()
                     .foregroundColor(.clear)
                     .frame(width: 60, height: 60)
@@ -24,17 +21,15 @@ struct DefultRankingView: View {
                             .clipped()
                     )
                 
-                Text("랭킹이 준비중이에요,,")
+                Text("주변에 해당 카테고리에 맞는 음식점이 없습니다..🥲")
                     .font(
                         Font.custom("Pretendard", size: 24)
                             .weight(.semibold)
                     )
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color.GrayScale900)
-                
-                
-                
-                Text("나만 알기 아까운 맛집을 알려주세요!\n대학생 찐 리뷰를 담기하여 대학생 인증 후\n후기 작성이 가능합니다.")
+
+                Text("아쉽지만 카테고리는 어떠실까요?")
                     .font(Font.custom("Pretendard", size: 16))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.GrayScale500)
@@ -42,13 +37,11 @@ struct DefultRankingView: View {
             .padding(.leading, 64)
             .padding(.top, 200)
     
-           
-        
     }
 }
 
-struct DefultRankingView_Previews: PreviewProvider {
+struct CategoryDefultView_Previews: PreviewProvider {
     static var previews: some View {
-        DefultRankingView()
+        CategoryDefultView()
     }
 }

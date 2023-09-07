@@ -76,10 +76,8 @@ struct RankingmainView: View {
                     VStack(alignment: .center, spacing: 0) {
                         if isDataEmpty() { // 데이터가 없는 경우
                             VStack(alignment: .center, spacing: 0) {
-                                
-                                DefultRankingView()
+                                RankingDefaultView()
                             }
-                             
                         } else { // 데이터가 있는 경우
                             ForEach(filteredRankingData().indices, id: \.self) { index in
                                 ScrollView {
@@ -96,16 +94,8 @@ struct RankingmainView: View {
                             .padding()
                         }
                     }
-
-
-                    
-
-                    
-                    
                 }
             }
-            
-            
         }.padding(.leading)
             .onAppear {
                 storeVM.rank()
@@ -116,10 +106,10 @@ struct RankingmainView: View {
             }
     }
     
-    func isDataEmpty() -> Bool {
+    func isDataEmpty() -> Bool { // 랭킹 데이터 있는지 없는지 조사 함수
         return filteredRankingData().isEmpty
     }
-
+    
     
     func filteredRankingData() -> [RankStore] {
         guard let selectedTitle = selectedTitle else {
