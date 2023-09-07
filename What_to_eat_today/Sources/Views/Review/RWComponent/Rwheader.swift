@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct Rwheader: View {
+    @StateObject private var storeVM = StoreVM()
+    @Binding var isSearchViewActive: Bool
+    @Binding var storeId: String
+    @Binding var storeName: String
     
-    @State private var isSearchViewActive = false
     @State private var searchText: String = ""
-    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
@@ -23,7 +25,6 @@ struct Rwheader: View {
                                 .weight(.medium)
                         )
                         .foregroundColor(.GrayScale600)
-                    
                     Text("*")
                         .font(
                             Font.custom("Pretendard", size: 12)
@@ -33,17 +34,11 @@ struct Rwheader: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.StateError)
                 }
-                
-                CustomNavLink(
-                    destination: StoreSearchView()
-                        .customNavigationTitle("랭킹")
-                        .customNavigationBarBackButtonHidden(false)
-                    ,isActive: $isSearchViewActive
-                ) {
-                    
+                Button(action: {
+                    isSearchViewActive = true
+                }) {
                     HStack(alignment: .center, spacing: 6) {
-                        
-                        Text("매장 검색하기")
+                        Text(storeName)
                             .font(
                                 Font.custom("Pretendard", size: 14)
                                     .weight(.medium)
@@ -67,17 +62,13 @@ struct Rwheader: View {
                     )
                 }
             }
-            
-            
-            
-            
-            
         }.padding(.leading)
     }
 }
 
-struct Rwheader_Previews: PreviewProvider {
-    static var previews: some View {
-        Rwheader()
-    }
-}
+
+//struct Rwheader_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Rwheader()
+//    }
+//}
