@@ -58,7 +58,7 @@ struct ReviewZip: View {
                             .stroke(Color.GrayScale100, lineWidth: 1)
                     )
             }
-        }.padding()
+        }
     }
 }
 

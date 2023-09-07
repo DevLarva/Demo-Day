@@ -55,6 +55,7 @@ struct HomeView: View {
                     .customNavigationTitle("홈")
                 ) {
                     RankingNavView()
+                        .padding(.leading)
                 }
             }
             .padding(.leading)
@@ -101,7 +102,6 @@ struct HomeView: View {
                 .foregroundColor(.clear)
                 .frame(width: 400, height: 8)
                 .background(Color.GrayScale100)
-            
             VStack {
                 RankingZipView(rankingZip: storeVM.rankSampleData)
                     .padding(.leading, 16)

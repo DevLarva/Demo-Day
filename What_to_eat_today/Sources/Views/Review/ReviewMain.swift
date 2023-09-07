@@ -25,6 +25,7 @@ struct ReviewMain: View {
                             }
                             Reviewnav()
                                 .padding(.bottom)
+                                .padding(.leading)
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 8)
@@ -34,7 +35,7 @@ struct ReviewMain: View {
                         VStack(alignment: .leading) {
                             ForEach(storeVM.reviewStoreData.indices, id: \.self) { index in
                                 ReviewList(reviewStore: storeVM.reviewStoreData[index])
-                                    .padding(.leading)
+                                    .padding(.leading, 32)
                                 if index < storeVM.reviewStoreData.count - 1 {
                                     Divider()
                                         .padding(.top)

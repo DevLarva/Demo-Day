@@ -35,7 +35,9 @@ struct CategoryMainView: View {
                             selectCategory = title
                         }
                 }.padding(.horizontal, 2)
+                    
                 
+                Spacer()
                 
                 Button(action: {
                     showMore.toggle()
@@ -44,8 +46,10 @@ struct CategoryMainView: View {
                         Image(showMore ? "up" : "down")
                             .frame(width: 24, height: 24)
                     }
-                    .offset(x: 5, y: 5)
+                    .offset(y: 5)
+                    .padding(.trailing)
                 }
+                
             }.padding()
             if showMore {
                 HStack(alignment:.firstTextBaseline ,spacing: 0) {
@@ -134,9 +138,13 @@ struct CategoryMainView: View {
                                 ) {
                                     CategoryDetailView(store: restaurant)
                                 }
-                                Divider().padding()
+                                Divider().padding(.trailing)
+                                    .padding(.vertical)
+                                
                             }
                             .padding(.leading)
+                            .padding(.trailing)
+                            
                             
                                
                         }
