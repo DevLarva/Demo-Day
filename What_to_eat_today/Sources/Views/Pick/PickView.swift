@@ -76,7 +76,11 @@ extension PickView {
         ScrollView {
             VStack(spacing: 24) {
                 ForEach(0..<pickCnt, id: \.self) { idx in
-                    CategoryDetailView(store: storeVM.wishlistData[idx])
+                    CustomNavLink(destination: StoreView(storeId: storeVM.wishlistData[idx].id)
+                        .customNavigationTitle(storeVM.wishlistData[idx].name)
+                    ) {
+                        CategoryDetailView(store: storeVM.wishlistData[idx])
+                    }
                     if (idx != pickCnt - 1) {
                         Rectangle()
                             .frame(width: .infinity, height: 1)

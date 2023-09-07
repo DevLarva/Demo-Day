@@ -81,7 +81,8 @@ struct RankingZipView: View {
                             ForEach(rankSamples.indices, id: \.self) { index in
                                 CustomNavLink(destination:
                                     StoreView(storeId:
-                                        rankSamples[index].id).customNavigationTitle("Home")
+                                        rankSamples[index].id)
+                                        .customNavigationTitle(rankSamples[index].name)
                                 ) { MainRanking(store:
                                     rankSamples[index], defaultImage:
                                     defaultImage)
