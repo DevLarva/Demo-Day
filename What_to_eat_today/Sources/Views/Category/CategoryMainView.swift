@@ -35,7 +35,6 @@ struct CategoryMainView: View {
                             selectCategory = title
                         }
                 }.padding(.horizontal, 2)
-                    
                 
                 Spacer()
                 
@@ -146,14 +145,13 @@ struct CategoryMainView: View {
                             .padding(.trailing)
                             
                             
-                               
+                            
                         }
                     }
                 }.padding(.leading)
                 
             }
-        } .onAppear {
-            
+        }.onAppear {
             storeVM.categorys(orderby: "distance")
             print(storeVM.categoryData)
         }
