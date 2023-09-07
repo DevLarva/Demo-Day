@@ -274,6 +274,25 @@ class StoreVM: ObservableObject {
     }
     //case updateReview(id: Int, dto: UpdateReviewRequest, image: UIImage?)///form-data, 패스스트링
     //case reviewLike(reviewid: Int, isLike: Bool)///패스 스트링, json
+    func reviewLike(reviewid: String, isLike: Bool) {
+        print("StoreVM: reviewLike() called")
+        StoreApiService.reviewLike(reviewid: reviewid, isLike: isLike)
+            .sink { [weak self] (completion: Subscribers.Completion<Error>) in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("StoreVM reviewLike() completion: 에러 발생 - 에러 메시지: \(error.localizedDescription)")
+//                    self?.taskError.send(error.localizedDescription)
+                }
+            } receiveValue: { (isSuccess: Bool) in
+                if isSuccess {
+                    self.taskSuccess.send()
+                }
+            }
+            .store(in: &subscription)
+    }
+    
     //case .mapList(let distance, let keyword, let category)
     func mapList(distance: Int, keyword: [String]? = nil, category: [String]? = nil) {
         print("StoreVM: mapList() called")

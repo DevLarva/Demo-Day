@@ -63,12 +63,14 @@ extension MyReviewsView {
             // 컨텐츠
             ScrollView {
                 VStack(spacing: 24) {
-                    ForEach(0..<myReviewCnt, id: \.self) { idx in
-                        StoreReviewContentView(review: Review.init(reviewId: myReviews[idx].id, nickname: myReviews[idx].nickname, score: Int(myReviews[idx].score), tags: myReviews[idx].tags, createdDate: myReviews[idx].createdDate, likeCount: myReviews[idx].likeCount, content: myReviews[idx].content, userImage: myReviews[idx].userImage))
-                        if (idx != myReviewCnt - 1) {
-                            Rectangle()
-                                .frame(width: .infinity, height: 1)
-                                .foregroundColor(Color.GrayScale200)
+                    if (myReviewCnt != 0) {
+                        ForEach(0..<myReviewCnt, id: \.self) { idx in
+                            StoreReviewContentView(reviewsCount: $myReviewCnt,review: Review.init(reviewId: myReviews[idx].id, nickname: myReviews[idx].nickname, score: Int(myReviews[idx].score), tags: myReviews[idx].tags, createdDate: myReviews[idx].createdDate, likeCount: myReviews[idx].likeCount, content: myReviews[idx].content, userImage: myReviews[idx].userImage))
+                            if (idx != myReviewCnt - 1) {
+                                Rectangle()
+                                    .frame(width: .infinity, height: 1)
+                                    .foregroundColor(Color.GrayScale200)
+                            }
                         }
                     }
                 }

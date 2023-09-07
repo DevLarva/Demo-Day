@@ -242,40 +242,40 @@ enum StoreApiService {
             .eraseToAnyPublisher()
     }
     //case updateReview(id: Int, dto: UpdateReviewRequest, image: UIImage?)///form-data, 패스스트링
-    //case reviewLike(reviewid: String, isLike: Bool)///패스 스트링, json
-    //    static func reviewLike(reviewid: String, isLike: Bool) -> AnyPublisher<Bool, Error> {
-    //        print("StoreApiService - reviewLike() called")
-    //
-    //        let storedTokenData = UserDefaultsManager.shared.getTokens()
-    //        let credential = OAuthCredential(accessToken: storedTokenData.accessToken,
-    //                                         refreshToken: storedTokenData.refreshToken,
-    //                                         expiration: Date(timeIntervalSinceNow: 60 * 120))
-    //
-    //        let authenticator = OAuthAuthenticator()
-    //        let authInterceptor = AuthenticationInterceptor(authenticator: authenticator,
-    //                                                        credential: credential)
-    //
-    //        return ApiClient.shared.session
-    //            .request(StoreRouter.reviewLike(reviewid: reviewid, isLike: isLike), interceptor: authInterceptor)
-    //            .validate(statusCode: 200..<300)
-    //            .publishData()
-    //            .tryMap { response -> Bool in
-    //                guard let statusCode = response.response?.statusCode else {
-    //                    throw NSError(domain: "서버의 오류로 좋아요를 실패하였습니다.", code: 0, userInfo: nil)
-    //                }
-    //                switch statusCode {
-    //                case 200:
-    //                    return true
-    //                case 404:
-    //                    throw NSError(domain: "이미 찜하지 않은 가게입니다.", code: 404, userInfo: nil)
-    //                case 409:
-    //                    throw NSError(domain: "이미 찜한 가게입니다.", code: 409, userInfo: nil)
-    //                default:
-    //                    throw NSError(domain: "서버의 오류로 좋아요를 실패하였습니다.", code: statusCode, userInfo: nil)
-    //                }
-    //            }
-    //            .eraseToAnyPublisher()
-    //    }
+    case reviewLike(reviewid: String, isLike: Bool)///패스 스트링, json
+        static func reviewLike(reviewid: String, isLike: Bool) -> AnyPublisher<Bool, Error> {
+            print("StoreApiService - reviewLike() called")
+    
+            let storedTokenData = UserDefaultsManager.shared.getTokens()
+            let credential = OAuthCredential(accessToken: storedTokenData.accessToken,
+                                             refreshToken: storedTokenData.refreshToken,
+                                             expiration: Date(timeIntervalSinceNow: 60 * 120))
+    
+            let authenticator = OAuthAuthenticator()
+            let authInterceptor = AuthenticationInterceptor(authenticator: authenticator,
+                                                            credential: credential)
+    
+            return ApiClient.shared.session
+                .request(StoreRouter.reviewLike(reviewid: reviewid, isLike: isLike), interceptor: authInterceptor)
+                .validate(statusCode: 200..<300)
+                .publishData()
+                .tryMap { response -> Bool in
+                    guard let statusCode = response.response?.statusCode else {
+                        throw NSError(domain: "서버의 오류로 좋아요를 실패하였습니다.", code: 0, userInfo: nil)
+                    }
+                    switch statusCode {
+                    case 200:
+                        return true
+                    case 404:
+                        throw NSError(domain: "이미 찜하지 않은 가게입니다.", code: 404, userInfo: nil)
+                    case 409:
+                        throw NSError(domain: "이미 찜한 가게입니다.", code: 409, userInfo: nil)
+                    default:
+                        throw NSError(domain: "서버의 오류로 좋아요를 실패하였습니다.", code: statusCode, userInfo: nil)
+                    }
+                }
+                .eraseToAnyPublisher()
+        }
     
     //case .mapList(let distance, let keyword, let category)
     static func mapList(distance: Int, keyword: [String]? = nil, category: [String]? = nil) -> AnyPublisher<MapListResponse ,Error> {
