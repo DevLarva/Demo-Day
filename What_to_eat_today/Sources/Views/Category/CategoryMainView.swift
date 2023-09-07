@@ -9,16 +9,15 @@ import SwiftUI
 
 struct CategoryMainView: View {
     @StateObject private var storeVM = StoreVM()
-//    var store: Restaurant
-    
+    //    var store: Restaurant
     let titles: [String] = ["한식", "중식", "양식", "일식", "카페", "술집", "분식", "아시아", "패스트푸드", "레스토랑"]
     var ranks : [Ranking] = rankingData // 데이터 불러옴
     @State private var showMore: Bool = false
     @Binding var selectCategory: String?
     @State private var isFilterFlag: Bool = false
     @State private var selectFilter: SearchFilter = SearchFilter(title: "거리순")// default 값
-//    @State private var selectFilter: SearchFilter = SearchFilter(title: "거리순")// default 값
-//    @Binding var SearchResultCnt: Int
+    //    @State private var selectFilter: SearchFilter = SearchFilter(title: "거리순")// default 값
+    //    @Binding var SearchResultCnt: Int
     private var selectedCategory: String? {
         get { selectCategory }
         set { selectCategory = newValue }
@@ -29,32 +28,25 @@ struct CategoryMainView: View {
         VStack(alignment: .leading, spacing: 8) {
             
             HStack(alignment:.firstTextBaseline ,spacing: 0) {
-                    
-                    ForEach(titles.prefix(4), id: \.self) { title in
-                        CapsuleButton(title: title, isSelected: title == selectedCategory)
-                            .onTapGesture {
-                                selectCategory = title
-                            }
-                    }.padding(.horizontal, 2)
-                    
-                                
-                    
-                    Button(action: {
-                        showMore.toggle()
-                    }) {
-                        HStack {
-                            Image(showMore ? "up" : "down")
-                                .frame(width: 24, height: 24)
-                        }
-                        .offset(x: 5, y: 5)
-                    }
-                }.padding()
                 
-            
-            
-            
-            
-            
+                ForEach(titles.prefix(4), id: \.self) { title in
+                    CapsuleButton(title: title, isSelected: title == selectedCategory)
+                        .onTapGesture {
+                            selectCategory = title
+                        }
+                }.padding(.horizontal, 2)
+                
+                
+                Button(action: {
+                    showMore.toggle()
+                }) {
+                    HStack {
+                        Image(showMore ? "up" : "down")
+                            .frame(width: 24, height: 24)
+                    }
+                    .offset(x: 5, y: 5)
+                }
+            }.padding()
             if showMore {
                 HStack(alignment:.firstTextBaseline ,spacing: 0) {
                     ForEach(titles.dropFirst(4).prefix(4), id: \.self) { title in
@@ -63,13 +55,12 @@ struct CategoryMainView: View {
                                 selectCategory = title
                             }
                     }.padding(.leading)
-                        
                 }
                 
                 
                 
                 
-              
+                
                 HStack(alignment:.firstTextBaseline ,spacing: 8) {
                     ForEach(titles.dropFirst(8), id: \.self) { title in
                         CapsuleButton(title: title, isSelected: title == selectedCategory)
@@ -78,7 +69,7 @@ struct CategoryMainView: View {
                             }
                     }.padding(.leading)
                 }
-               
+                
             }
             Rectangle()
                 .foregroundColor(.clear)
@@ -86,7 +77,7 @@ struct CategoryMainView: View {
                 .background(Color.GrayScale100)
             
             ScrollView(showsIndicators: false) {
-                 
+                
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {  //이후에 필터 컴포넌트 추가X
                         VStack(alignment: .leading, spacing: 5) {
@@ -102,8 +93,8 @@ struct CategoryMainView: View {
                                 .foregroundColor(Color(red: 0.46, green: 0.46, blue: 0.46))
                         }
                         .padding()
-// MARK: - 필터
-                    Spacer()
+                        // MARK: - 필터
+                        Spacer()
                         
                         ZStack {
                             Button(action: {
@@ -116,7 +107,7 @@ struct CategoryMainView: View {
                                     Image(isFilterFlag ? "store-filter-on" : "store-filter-off")
                                         .frame(width: 19, height: 19)
                                 }.zIndex(1)
-                                .padding(0)
+                                    .padding(0)
                             }
                             .buttonStyle(PlainButtonStyle()) // Add this line
                             .overlay(alignment: .topTrailing) {
@@ -134,25 +125,39 @@ struct CategoryMainView: View {
                         .padding(.trailing, 16)
                     }.zIndex(1)
                     VStack(alignment: .leading, spacing: 0) {
-                        ForEach(storeVM.categorys.filter {selectedCategory == nil || $0.category == selectedCategory }) { restaurant in
-                            CustomNavLink(destination: StoreView(storeId: restaurant.storeId)
-                                .customNavigationTitle("카테고리")
-                            ) {
-                                CategoryDetailView(store: restaurant)
+                        if isCategoryDataEmpty() {
+                            CategoryDefultView()
+                        } else {
+                            ForEach(storeVM.categorys.filter {selectedCategory == nil || $0.category == selectedCategory }) { restaurant in
+                                CustomNavLink(destination: StoreView(storeId: restaurant.storeId)
+                                    .customNavigationTitle("카테고리")
+                                ) {
+                                    CategoryDetailView(store: restaurant)
+                                }
+                                Divider().padding()
                             }
-                            Divider().padding()
+                            .padding(.leading)
+                            
+                               
                         }
-                    }.padding(.leading)
-
-                }
+                    }
+                }.padding(.leading)
+                
             }
-        }
-        .onAppear {
+        } .onAppear {
+            
             storeVM.categorys(orderby: "distance")
             print(storeVM.categoryData)
         }
     }
+    func isCategoryDataEmpty() -> Bool {    //카테고리 데이터 있는지 없는지 검사 함수
+        return storeVM.categorys.filter {selectedCategory == nil || $0.category == selectedCategory }.isEmpty
+    }
 }
+
+
+
+
 
 //struct CategoryMainView_Previews: PreviewProvider {
 ////    @State static var testResultCnt: Int = 4

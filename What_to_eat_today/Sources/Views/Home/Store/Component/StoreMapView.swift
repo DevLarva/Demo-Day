@@ -12,38 +12,55 @@ import MapKit
 import CoreLocation
 
 struct StoreMapView: View {
-    @StateObject private var viewModel = ContentViewModel() // 차후 카카오 지도로 대체 필요
+    var storeDetail: StoreDetailResponse // 가게 정보를 전달받음
+    @StateObject private var mapViewModel = StoreMapViewModel()
+    @StateObject private var viewModel = ContentViewModel()
     
-    var body: some View{
-        ZStack(alignment:.bottomTrailing) {
-            Map(coordinateRegion: $viewModel.region,showsUserLocation: true)
-                .ignoresSafeArea()
-                .accentColor(Color(.systemPink))
-                .onAppear {
-                    viewModel.checkIfLocationServicesIsEnabled()
+    
+    
+    @ObservedObject var storeVM: StoreVM
+    
+    var body: some View {
+        ZStack(alignment: .bottomTrailing) {
+            ZStack(alignment: .bottomTrailing) {
+                Map(coordinateRegion: $viewModel.region,
+                    annotationItems: mapViewModel.annotations) { annotation in
+                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: annotation.position.x, longitude: annotation.position.y), tint:.red)
                 }
-            
-            HStack(alignment: .center, spacing: 0) {
-                Image("map")
-                .frame(width: 24, height: 24)
+                    .ignoresSafeArea()
+                    .accentColor(Color(.systemPink))
+                    .onReceive(storeVM.$storeDetailData) { newStoreDetail in
+                        mapViewModel.setAnnotation(for: newStoreDetail)
+                        viewModel.setRegion(for: CLLocationCoordinate2D(latitude: newStoreDetail.y, longitude: newStoreDetail.x))
+                    }
             }
-            .padding(7)
-            .frame(width: 38, height: 38, alignment: .center)
-            .background(Color.BlackWhiteWhite)
+        } .frame(width: 343, height: 181) // 차후비율로조정필요
             .cornerRadius(8)
-            .shadow(color: .black.opacity(0.11), radius: 4, x: 0, y: 4)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 12)
-        }
-        .frame(width: 343, height: 181) // 차후 비율로 조정 필요
-        .cornerRadius(8)
+    }
+}
+    class StoreMapViewModel: ObservableObject {
+        @Published var annotations: [CustomAnnotation] = []
         
+        func setAnnotation(for storeDetail: StoreDetailResponse) {
+            let annotation = CustomAnnotation(title: storeDetail.storeName, position: Position(x: storeDetail.y, y: storeDetail.x ))
+            annotations.append(annotation)
+            print("x: \(storeDetail.x)")
+            print("y: \(storeDetail.y)")
+        }
     }
-}
+    
+    struct CustomAnnotation: Identifiable {
+        let id = UUID()
+        let title: String?
+        let position: Position
+    }
+    
+    struct Position {
+        let x: Double
+        let y: Double
+    }
+    
 
 
-struct StoreMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        StoreMapView()
-    }
-}
+
+    

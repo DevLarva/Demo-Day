@@ -94,27 +94,18 @@ struct Rankingfirst: View {
             Spacer().frame(width: 5)
             
             VStack {
-                HStack(alignment: .center, spacing: 0) {
-                    Button(action: {
-                        isWishlist.toggle()
-                    }) {
-                        HStack(alignment: .center, spacing: 8) {
-                            Image(isWishlist ? "heartfill" : "heart")
-                                .frame(width: 32, height: 32)
-                        }.padding(.trailing)
-                            .frame(width: 32, height: 32, alignment: .center)
-                        
+                    HStack(alignment:.center ,spacing :0){
+                        Button(action:{
+                            storeVM.toggleWishList(storeId : rankData.id)
+                        }) {
+                            Image(storeVM.wishListStatus[rankData.id] ?? false ? "heartfill" : "heart")
+                                .frame(width :32 , height :32)
+                        }
                     }
                 }
-                
-                .onAppear {
-                    isWishlist = rankData.wishlist
-                }
-
-                .onChange(of: isWishlist){ _ in
-                    storeVM.toggleWishList(storeId: rankData.id, isLike: isWishlist )
-                }
-            }
+            .onAppear {
+                      storeVM.getWishlist()  // getWishlist 함수 호출하여 wishListStatus 갱신
+                  }
         }
         .padding(0)
         .frame(maxWidth: .infinity, alignment: .leading)

@@ -73,28 +73,29 @@ struct RankingmainView: View {
                     }.padding()
                     
                     
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(filteredRankingData().indices, id: \.self) { index in
-                            ScrollView {
-                                CustomNavLink(destination: StoreView(storeId: filteredRankingData()[index].id)
-                                    .customNavigationTitle("랭킹")
-                                ) {
-                                    RankingDetailView(rankData: filteredRankingData()[index], rankIndex:index+1)
-                                }
-                                .buttonStyle(PlainButtonStyle())
+                    VStack(alignment: .center, spacing: 0) {
+                        if isDataEmpty() { // 데이터가 없는 경우
+                            VStack(alignment: .center, spacing: 0) {
+                                RankingDefaultView()
                             }
-                            Divider()
+                        } else { // 데이터가 있는 경우
+                            ForEach(filteredRankingData().indices, id: \.self) { index in
+                                ScrollView {
+                                    CustomNavLink(destination: StoreView(storeId: filteredRankingData()[index].id)
+                                        .customNavigationTitle("랭킹")
+                                    ) {
+                                        RankingDetailView(rankData: filteredRankingData()[index], rankIndex:index+1)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                }
+                                
+                                Divider()
+                            }
+                            .padding()
                         }
-                        .padding()
                     }
-                    
-
-                    
-                    
                 }
             }
-            
-            
         }.padding(.leading)
             .onAppear {
                 storeVM.rank()
@@ -104,6 +105,11 @@ struct RankingmainView: View {
                 .store(in: &storeVM.subscription)
             }
     }
+    
+    func isDataEmpty() -> Bool { // 랭킹 데이터 있는지 없는지 조사 함수
+        return filteredRankingData().isEmpty
+    }
+    
     
     func filteredRankingData() -> [RankStore] {
         guard let selectedTitle = selectedTitle else {

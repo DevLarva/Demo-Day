@@ -19,6 +19,7 @@ class StoreVM: ObservableObject {
     let selectedStoreName = PassthroughSubject<String, Never>()
     let storeInfoSuccess = PassthroughSubject<Void, Never>()
     @Published var categoryData: CategoryResponse = .init(한식: [], 중식: [], 양식: [], 일식: [], 분식: [], 아시아: [], 패스트푸드: [], 레스토랑: [],                                                카페: [], 술집: [])
+    @Published var wishListStatus: [String: Bool] = [:]
     @Published var wishlistData: [Restaurant] = []
     @Published var recommendData: [RecommendStore] = []
     @Published var searchStoreData: [RecommendStore] = []
@@ -227,6 +228,30 @@ class StoreVM: ObservableObject {
             })
             .store(in: &subscription)
     }
+    //위시리스트가 각요소에 맞게끔 독립
+    func toggleWishList(storeId: String) {
+        // 위시리스트 상태 토글
+        let currentStatus = wishListStatus[storeId] ?? false
+        wishListStatus[storeId] = !currentStatus
+
+        // 서버로 업데이트
+        StoreApiService.toggleWishList(storeId: storeId, isLike: !currentStatus)
+            .sink { [weak self] (completion: Subscribers.Completion<Error>) in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("StoreVM toggleWishList() completion: 에러 발생 - 에러 메시지: \(error.localizedDescription)")
+                    self?.taskError.send(error.localizedDescription)
+                }
+            } receiveValue: { (isSuccess: Bool) in
+                if isSuccess {
+                    self.taskSuccess.send()
+                }
+            }
+            .store(in: &subscription)
+    }
+
     
     //case deleteReview(reviewid: String)///패스 스트링
     func deleteReview(reviewid: String) {
@@ -378,4 +403,5 @@ class StoreVM: ObservableObject {
             }
             .store(in: &subscription)
     }
+    
 }

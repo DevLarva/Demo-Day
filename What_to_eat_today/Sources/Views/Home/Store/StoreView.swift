@@ -28,7 +28,7 @@ struct StoreView:View {
                         StoreRankingView(rankingData: convertedRankingData)
                         VStack(alignment: .center, spacing: 24) {
                             StoreDetailView(address: storeinfo.address, time: storeinfo.time)
-                            StoreMapView()
+                            StoreMapView(storeDetail: storeinfo, storeVM: storeVM)
                             Rectangle() // 구분선
                                 .foregroundColor(.clear)
                                 .frame(width: .infinity, height: 8)
