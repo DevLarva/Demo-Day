@@ -103,6 +103,8 @@
 		ACE98D592A7A8F23009BE851 /* MapViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE98D582A7A8F23009BE851 /* MapViewTitle.swift */; };
 		ACE9F6352A8775EF00A2C52B /* NonRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE9F6342A8775EF00A2C52B /* NonRankingView.swift */; };
 		ACE9F6372A877A7900A2C52B /* NonPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE9F6362A877A7900A2C52B /* NonPickView.swift */; };
+		ACF8DE622AA9ED2100964C35 /* RankingDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF8DE612AA9ED2100964C35 /* RankingDefaultView.swift */; };
+		ACF8DE642AA9F2F700964C35 /* CategoryDefultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF8DE632AA9F2F700964C35 /* CategoryDefultView.swift */; };
 		ACF940AF2A8F955C005670E4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF940AE2A8F955C005670E4 /* WebView.swift */; };
 		ACF940B22A8F9613005670E4 /* WebConnecter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF940B12A8F9613005670E4 /* WebConnecter.swift */; };
 		B30555752A7C19F60095E230 /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30555742A7C19F60095E230 /* Ask.swift */; };
@@ -281,6 +283,8 @@
 		ACE98D582A7A8F23009BE851 /* MapViewTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTitle.swift; sourceTree = "<group>"; };
 		ACE9F6342A8775EF00A2C52B /* NonRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonRankingView.swift; sourceTree = "<group>"; };
 		ACE9F6362A877A7900A2C52B /* NonPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonPickView.swift; sourceTree = "<group>"; };
+		ACF8DE612AA9ED2100964C35 /* RankingDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingDefaultView.swift; sourceTree = "<group>"; };
+		ACF8DE632AA9F2F700964C35 /* CategoryDefultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDefultView.swift; sourceTree = "<group>"; };
 		ACF940AE2A8F955C005670E4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ACF940B12A8F9613005670E4 /* WebConnecter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebConnecter.swift; sourceTree = "<group>"; };
 		B30555742A7C19F60095E230 /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
@@ -454,6 +458,7 @@
 			children = (
 				AC55A1D62A73DC2C0066A690 /* Rankingfirst.swift */,
 				AC55A1D82A73DF5D0066A690 /* Rankingsecond.swift */,
+				ACF8DE612AA9ED2100964C35 /* RankingDefaultView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 			children = (
 				AC55A1DB2A73E51E0066A690 /* Categoryfirst.swift */,
 				AC55A1DD2A73E9E10066A690 /* Categorysecond.swift */,
+				ACF8DE632AA9F2F700964C35 /* CategoryDefultView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1239,6 +1245,7 @@
 				ACE894DA2A5301AA00B46A3A /* CheckboxToggleStyle.swift in Sources */,
 				B3663F272A70167A00EE280B /* StoreReviewContentView.swift in Sources */,
 				B3664F5C2A7A789B00363086 /* ReviewPolicyView.swift in Sources */,
+				ACF8DE642AA9F2F700964C35 /* CategoryDefultView.swift in Sources */,
 				AC8A492F2A592B33003BD8A4 /* LoginView.swift in Sources */,
 				B3664F662A7A8FAF00363086 /* Notice.swift in Sources */,
 				B3664F5E2A7A78A900363086 /* PrivacyPolicyView.swift in Sources */,
@@ -1270,6 +1277,7 @@
 				B35A547B2A91483B00E59B96 /* UserVM.swift in Sources */,
 				B3663F1F2A70161500EE280B /* StoreDetailView.swift in Sources */,
 				AC8620282A5D8668003312F6 /* CameraView.swift in Sources */,
+				ACF8DE622AA9ED2100964C35 /* RankingDefaultView.swift in Sources */,
 				B328E7472A8558A5004C7C5B /* TokenData.swift in Sources */,
 				B3663F232A70165000EE280B /* StoreKeywordView.swift in Sources */,
 				AC2A60B82A768302009480D7 /* MapSettingthird.swift in Sources */,
@@ -1416,7 +1424,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"What_to_eat_today/Preview Content\"";
-				DEVELOPMENT_TEAM = BB7N2YGU75;
+				DEVELOPMENT_TEAM = 8N7YRTC92N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "What_to_eat_today/What-to-eat-today-Info.plist";
@@ -1435,7 +1443,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bob.bobmukgong-ryuwon";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bob.bobmukgong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1453,7 +1461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"What_to_eat_today/Preview Content\"";
-				DEVELOPMENT_TEAM = BB7N2YGU75;
+				DEVELOPMENT_TEAM = 8N7YRTC92N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "What_to_eat_today/What-to-eat-today-Info.plist";
@@ -1472,7 +1480,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bob.bobmukgong-ryuwon";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bob.bobmukgong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

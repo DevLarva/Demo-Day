@@ -40,7 +40,11 @@ struct StoreRankingElementView: View {
             return "ranking-babyak"
         } else if tag.contains("혼밥") {
             return "ranking-solo"
-        } else {
+        }else if tag.contains("가성비") {
+            return "gasungb"
+        }else if tag.contains("술약속") {
+            return "sulyak"
+        }else {
             return "ranking-group"
         }
     }
@@ -52,7 +56,7 @@ struct StoreRankingElementView: View {
             Image(rankingData.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
+                .frame(width: 50, height: 50)
                 .clipped()
             
             //텍스트
@@ -85,10 +89,15 @@ struct StoreRankingElementView: View {
             return "ranking-babyak"
         } else if tag.contains("혼밥") {
             return "ranking-solo"
-        } else {
+        }else if tag.contains("가성비") {
+            return "gasungb"
+        }else if tag.contains("술약속") {
+            return "sulyak"
+        }else {
             return "ranking-group"
         }
     }
+    
     
     
     

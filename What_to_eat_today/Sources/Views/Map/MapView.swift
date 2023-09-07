@@ -110,6 +110,7 @@ struct MapViewSE: View {
         }
         .onAppear {
             updateMapList()
+            
             Coordinator.shared.checkIfLocationServiceIsEnabled()
             storeVM.taskSuccess
                 .sink { _ in
@@ -127,6 +128,7 @@ struct MapViewSE: View {
                 .store(in: &storeVM.subscription)
             Coordinator.shared.checkIfLocationServiceIsEnabled()
         }
+       
     }
     func updateMapList() {
         let distanceInMeters: Int
