@@ -130,7 +130,7 @@ struct CategoryMainView: View {
                         } else {
                             ForEach(storeVM.categorys.filter {selectedCategory == nil || $0.category == selectedCategory }) { restaurant in
                                 CustomNavLink(destination: StoreView(storeId: restaurant.storeId)
-                                    .customNavigationTitle("카테고리")
+                                    .customNavigationTitle(restaurant.name)
                                 ) {
                                     CategoryDetailView(store: restaurant)
                                 }

@@ -82,7 +82,7 @@ struct RankingmainView: View {
                             ForEach(filteredRankingData().indices, id: \.self) { index in
                                 ScrollView {
                                     CustomNavLink(destination: StoreView(storeId: filteredRankingData()[index].id)
-                                        .customNavigationTitle("랭킹")
+                                        .customNavigationTitle(filteredRankingData()[index].name)
                                     ) {
                                         RankingDetailView(rankData: filteredRankingData()[index], rankIndex:index+1)
                                     }
