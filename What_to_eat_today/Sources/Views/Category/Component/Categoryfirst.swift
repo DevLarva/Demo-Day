@@ -15,13 +15,14 @@ struct Categoryfirst: View {
         
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                
                 Text(store.name)
                     .font(
                         Font.custom("Pretendard", size: 18)
                             .weight(.medium)
                     )
                     .foregroundColor(.GrayScale900)
+                    .lineLimit(1)
+                    .multilineTextAlignment(.leading)
                 
                 Text(store.category)
                     .font(
@@ -31,7 +32,9 @@ struct Categoryfirst: View {
                     .kerning(0.25)
                     .foregroundColor(.GrayScale500)
                 
-            }
+                
+            }.frame(width: 225, height: 26, alignment: .leading)
+           
             
             HStack(alignment: .center, spacing: 6) {
                 Image("starfill")
@@ -75,7 +78,7 @@ struct Categoryfirst: View {
                             .frame(width: 32, height: 32, alignment: .center)
                         
                     }
-                }
+                }.padding(.trailing)
                 
                 .onAppear {
                     if let isWish = store.isWishlist {

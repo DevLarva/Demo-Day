@@ -55,8 +55,8 @@ struct CustomStoreSearchContentBarCell: View {
             .padding(0)
             
         }
-        .padding(0)
-        .frame(width: .infinity, alignment: .center)
+        .padding(.horizontal)
+        
     }
 }
 

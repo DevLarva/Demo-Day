@@ -44,8 +44,7 @@ extension PickView {
                 }
                 Spacer()
                 // Alternative Views and Spacers
-                Image("notifications")
-                    .frame(width: 24, height: 24)
+                
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 17)

@@ -24,11 +24,13 @@ struct StoreSearchView: View {
         VStack(alignment: .leading) {
             SearchBar
             // 1. 검색 O 검색 결과 O
+                
             if (isResult) {
                 CustomStoreSearchContentBarCell(selectFilter: $selectFilter, SearchResultCnt: $SearchResultCnt)
                     .zIndex(1) //우선 순위 올리기
                     .padding(.horizontal, 16)
             }
+            
             ScrollView {
                 // 1. 검색 O 검색 결과 O
                 if (isResult) {
@@ -42,8 +44,10 @@ struct StoreSearchView: View {
                         }
                         if index < SearchResultCnt - 1 {
                             Divider().padding(.trailing)
+                                .padding(.leading)
                         }
-                    }
+                    }.padding(.horizontal)
+                        
                 } else { // 2. 검색 O 검색 결과 X
                     if (isSearch) {
                         CustomStoreSearchNothingCell(searchText: completedText)
@@ -75,10 +79,12 @@ struct StoreSearchView: View {
                         }
                     }
                     .padding(.top, 16)
+                    .padding(.horizontal, 16)
                 }
             }
+            .padding(.horizontal, 16)
         }
-        .padding(.horizontal, 16)
+//        .padding(.horizontal, 16)
         .onAppear {
             storeVM.recommendStore()
             storeVM.taskSuccess .sink {
@@ -140,9 +146,10 @@ extension StoreSearchView {
                                 break;
                             }
                         }
+                        
                         Spacer()
                         
-                    }.padding()
+                    }.padding(.horizontal)
                 }.foregroundColor(.GrayScale100)
         }.padding()
     }
@@ -166,11 +173,12 @@ struct ReviewStoreSearchView: View {
     var body: some View {
         VStack(alignment: .leading) {
             SearchBar
+                .padding(.horizontal)
             // 1. 검색 O 검색 결과 O
             if (isResult) {
                 CustomStoreSearchContentBarCell(selectFilter: $selectFilter, SearchResultCnt: $SearchResultCnt)
                     .zIndex(1) //우선 순위 올리기
-                    .padding(.horizontal, 16)
+                    .padding(.leading, 16)
             }
             ScrollView {
                 // 1. 검색 O 검색 결과 O
@@ -183,11 +191,12 @@ struct ReviewStoreSearchView: View {
                             isReviewWrite = false
                         }) {
                             CustomStoreSimpleCell(store: store)
+                                
                         }
                         if index < SearchResultCnt - 1 {
                             Divider().padding(.trailing)
                         }
-                    }
+                    }.padding(.leading, 16)
                 } else { // 2. 검색 O 검색 결과 X
                     if (isSearch) {
                         CustomStoreSearchNothingCell(searchText: completedText)
@@ -220,9 +229,11 @@ struct ReviewStoreSearchView: View {
                     }
                     .padding(.top, 16)
                 }
+               
             }
+            .padding(.leading, 16)
         }
-        .padding(.horizontal, 16)
+        .padding(.leading, 16)
         .onAppear {
             storeVM.recommendStore()
             storeVM.taskSuccess .sink {
@@ -285,9 +296,9 @@ extension ReviewStoreSearchView {
                         }
                         Spacer()
                         
-                    }.padding()
+                    }
                 }.foregroundColor(.GrayScale100)
-        }.padding()
+        }
     }
 }
 
