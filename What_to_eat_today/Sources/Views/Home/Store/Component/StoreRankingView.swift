@@ -40,7 +40,11 @@ struct StoreRankingElementView: View {
             return "ranking-babyak"
         } else if tag.contains("혼밥") {
             return "ranking-solo"
-        } else {
+        }else if tag.contains("가성비") {
+            return "gasungb"
+        }else if tag.contains("술약속") {
+            return "sulyak"
+        }else {
             return "ranking-group"
         }
     }
@@ -85,10 +89,15 @@ struct StoreRankingElementView: View {
             return "ranking-babyak"
         } else if tag.contains("혼밥") {
             return "ranking-solo"
-        } else {
+        }else if tag.contains("가성비") {
+            return "gasungb"
+        }else if tag.contains("술약속") {
+            return "sulyak"
+        }else {
             return "ranking-group"
         }
     }
+    
     
     
     

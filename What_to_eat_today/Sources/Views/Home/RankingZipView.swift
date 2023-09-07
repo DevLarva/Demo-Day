@@ -79,14 +79,16 @@ struct RankingZipView: View {
                                 .frame(width: 415, height: 401, alignment: .center)
                         } else {
                             ForEach(rankSamples.indices, id: \.self) { index in
-                                CustomNavLink(destination: StoreView(storeId: rankSamples[index].id)
-                                    .customNavigationTitle("Home")
-                                ) {
-                                    MainRanking(store: rankSamples[index], defaultImage: defaultImage)
+                                CustomNavLink(destination:
+                                    StoreView(storeId:
+                                        rankSamples[index].id).customNavigationTitle("Home")
+                                ) { MainRanking(store:
+                                    rankSamples[index], defaultImage:
+                                    defaultImage)
                                 }
                             }
-                            .onChange(of:selectedTitle){ value in
-                                switch value{
+                            .onAppear{
+                                switch selectedTitle{
                                 case "밥약":
                                     defaultImage = "babyak-default"
                                 case "가성비":
@@ -96,13 +98,30 @@ struct RankingZipView: View {
                                 case "단체":
                                     defaultImage = "group-default"
                                 default :
-                                    defaultImage = "alcohol-default"
-                                }
+                                     defaultImage = "alcohol-default"
+                               }
                             }
-                        }
-                    }//.ignoresSafeArea(.all)
-                }
-            }.padding(.leading, -25)
+                            .onChange(of:selectedTitle){ value in
+                                 switch value{
+                                 case "밥약":
+                                     defaultImage = "babyak-default"
+                                 case "가성비":
+                                     defaultImage = "cost-default"
+                                 case "혼밥":
+                                     defaultImage = "solo-default"
+                                 case "단체":
+                                     defaultImage = "group-default"
+                                 default :
+                                      defaultImage = "alcohol-default"
+                                          
+                                      }
+                             }
+                         }//.ignoresSafeArea(.all)
+                     }
+                 }.padding(.leading,-25)
+
+            }
+
             
         }
     }
