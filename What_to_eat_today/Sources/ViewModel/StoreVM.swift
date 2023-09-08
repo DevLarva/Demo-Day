@@ -25,7 +25,7 @@ class StoreVM: ObservableObject {
     @Published var searchStoreData: [RecommendStore] = []
     @Published var mapListData: MapListResponse = .init(campers: .init(x: 35, y: 129), stores: [])
     @Published var mapStoreInfoData: Restaurant = .init(storeId: "", name: "", category: "", rank: [], score: 0.0, status: nil, reviewCount: 0, time: "", imageUrl: "", reviewImage: nil, reviewContent: nil, isWishlist: nil)
-    @Published var storeDetailData: StoreDetailResponse = .init(storeName: "", category: "", imageUrl: nil, keywords: [], tags: [:], status: nil, phoneNumber: nil, address: "", time: "", imageCount: 0, x: 0.0, y: 0.0)
+    @Published var storeDetailData: StoreDetailResponse = .init(storeName: "", category: "", imageUrl: nil, keywords: [], tags: [:], status: nil, phoneNumber: nil, address: "", time: "", imageCount: 0, x: 0.0, y: 0.0, isWishlist: false)
     @Published var reviewStoreData: ReviewedStoresResponse = .init()
     @Published var myReviewsData: MyReviewsResponse = .init()
     @Published var rankSampleData: RankSampleResponse = .init(밥약: [], 가성비: [], 혼밥: [], 단체: [], 술약속: [])

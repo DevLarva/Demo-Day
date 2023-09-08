@@ -20,6 +20,7 @@ struct StoreDetailResponse: Codable {
     let imageCount: Int
     let x: Double
     let y: Double
+    let isWishlist: Bool
     
     struct Keyword: Codable {
         let tag: String
