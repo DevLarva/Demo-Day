@@ -102,8 +102,8 @@ struct RankingZipView: View {
                                      defaultImage = "alcohol-default"
                                }
                             }
-                            .onChange(of:selectedTitle){ value in
-                                 switch value{
+                            .onChange(of:selectedTitle) { value in
+                                 switch value {
                                  case "밥약":
                                      defaultImage = "babyak-default"
                                  case "가성비":

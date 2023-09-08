@@ -34,14 +34,17 @@ struct ReviewMain: View {
                         ReviewZip()
                         VStack(alignment: .leading) {
                             ForEach(storeVM.reviewStoreData.indices, id: \.self) { index in
+                                
+                                
 
 
                                 CustomNavLink(destination: StoreView(storeId: storeVM.reviewStoreData[index].id)
                                     .customNavigationTitle(storeVM.reviewStoreData[index].name)
                                 ) {
                                     ReviewList(reviewStore: storeVM.reviewStoreData[index])
-                                        .padding(.leading)
+                                        .padding(.leading, 32)
                                 }
+                                
 
                                 if index < storeVM.reviewStoreData.count - 1 {
                                     Divider()
@@ -52,6 +55,9 @@ struct ReviewMain: View {
                             }
                         }.padding()
                         
+                    }
+                    .refreshable {
+                        await refresh()
                     }
                     Button(action: {
                         showReviewWriteView.toggle()
@@ -69,9 +75,10 @@ struct ReviewMain: View {
             }
             .store(in: &storeVM.subscription)
         }
-        
     }
-    
+    @MainActor func refresh() async {
+        storeVM.getWishlist()
+    }
 }
 
 struct ReviewMain_Previews: PreviewProvider {
