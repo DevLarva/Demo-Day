@@ -23,6 +23,7 @@
   <img src="https://github.com/DevLarva/Demo-Day/assets/75058050/d666dd0b-f2d3-4e32-a137-c92a74f89497" width="900px" height="600px">
 </p>
 
+<br>
 
 ## 주요기능 미리보기 🔥
 | ![이미지 1](https://github.com/DevLarva/Demo-Day/assets/75058050/fca97238-04ea-4a25-99c5-2331699e149b) | ![이미지 2](https://github.com/DevLarva/Demo-Day/assets/75058050/156ea72c-e6cb-4770-b026-ea4a6bc752ff) |
