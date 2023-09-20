@@ -7,15 +7,18 @@
   <img src="https://github.com/DevLarva/Demo-Day/assets/75058050/7ebba525-030e-4652-a51e-fb99743aa343" width="900px" height="600px">
 </p>
 
-## 목차 📑
-- [소개](#소개)
-- [팀원](#팀원)
-- [기능](#기능)
+
+<br>
+<br>
 
 ## 소개 👋
+
 고물가 시대, 과열화된 SNS광고는 가성비있고 든든한 한 끼가 목적인 대학생들을 부담스럽게 하곤 합니다. 
 이러한 이유로 기존의 지도 플랫폼은 대학생들의 니즈를 충족시켜주기엔 한계가 있다고 느껴져 앱으로 제작 하게 되었습니다. 
+<br>
+<br>
 ## 팀원 🤩
+
 <p align="center">
   <img src="https://github.com/DevLarva/Demo-Day/assets/75058050/d666dd0b-f2d3-4e32-a137-c92a74f89497" width="900px" height="600px">
 </p>
